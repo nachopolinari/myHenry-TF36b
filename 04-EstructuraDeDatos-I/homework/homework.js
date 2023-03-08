@@ -17,11 +17,24 @@ Secuencia:  0, 1, 1, 2, 3, 5, 8, 13, 21, 34, ...
 Como ejercicio adicional y completamente opcional, al terminar de resolver este problema pueden intentar definir funciones que logren 
 los mismos resultados pero de manera iterativa.
 */
+/*factorial:
+ !5 = 5*4*3*2*1 ->120   => tamb se puede expresar como !5 = 5*!4
+ !4 = 4*3*2*1   ->24    =>!4 = 4*!3
+ !3 = 3*2*1     ->6     =>!3 = 3*!2
+ !1 = 1         ->1     
+ !0 = 1         ->1
+*/
+function nFactorial(n) {
+  if(n===0 || n===1){ // por convencion matematica, sabemos que el factorial de 0 y de 1 es =1
+    return 1
+  }else{                   //si nos dan un numero mas grande, debemos aplicar recursividad
+return n* nFactorial(n-1);    //retorna n por el factorial (recursivo) de n-1
+  }
+}
 
- function nFactorial(n) {}
-
-
-
+console.log(nFactorial(3));
+console.log(nFactorial(5));
+console.log(nFactorial(4));
 function nFibonacci(n) {}
 
 /*
