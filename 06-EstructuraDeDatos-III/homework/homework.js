@@ -19,15 +19,15 @@ function BinarySearchTree(value) {
 //METODO SIZE
 
 BinarySearchTree.prototype.size = function () {
-//    if (!this.left && !this.right) {
-//       return 1
-//    }
-//    if (!this.left) return 1 + this.right.size();
-//    if (!this.right) return 1 + this.left.size();
-//    if (this.left && this.right) return 1 + this.left.size() + this.right.size(); /**podria ser un else tmb */
+   //    if (!this.left && !this.right) {
+   //       return 1
+   //    }
+   //    if (!this.left) return 1 + this.right.size();
+   //    if (!this.right) return 1 + this.left.size();
+   //    if (this.left && this.right) return 1 + this.left.size() + this.right.size(); /**podria ser un else tmb */
 
-// }
-// COMENTADO PARA VOLVER A HACERLO CON PROFE MAURI
+   // }
+   // COMENTADO PARA VOLVER A HACERLO CON PROFE MAURI
 
    //quiere retornar =>1+ todo lo de la izq + todo lo de la der..
    //contador arranca en 1 porq se cuenta a si mismo (fitipaldi)
@@ -52,15 +52,16 @@ BinarySearchTree.prototype.insert = function (value) {
          this.left = new BinarySearchTree(value)
       } else {
          this.left.insert(vale);
+      }
+   } else {
+      if (!this.right) {
+         this.right = new BinarySearchTree(value)
       } else {
-         if (!this.right) {
-            this.right = new BinarySearchTree(value)
-         } else {
-            this.right.insert(value)
-         }
+         this.right.insert(value)
       }
    }
 }
+
 //COMENTADO PARA REHACERLO CON PROFE MAURI
 // // 1 - me preg si es mayor o menor y en base a eso se a dnd mirar
 // if (value < this.value) {
@@ -126,29 +127,29 @@ BinarySearchTree.prototype.contains = function (value) {
 
 // METODO DEPTHFIRSTFOREACH
 
-BinarySearchTree.prototype.depthFirstForEach(cb,order) {
-//post ORDEN
-if(order === "post-order"){
-   this.left && this.left.depthFirstForEach(cb, order);
-   this.right && this.right.depthFirstForEach(cb,order);
-   cb(this.value);
-}
-//pre order
-else if(order==="pre-order"){
-   cb(this.value);
-   this.left && this.left.depthFirstForEach(cb, order);
-   this.right && this.right.depthFirstForEach(cb,order);
-}
-//IN order
-else{
-   this.left && this.left.depthFirstForEach(cb, order);
-   cb(this.value);
-   this.right && this.right.depthFirstForEach(cb,order);
-}
-}
+BinarySearchTree.prototype.depthFirstForEach(cb, order)
+   //post ORDEN
+   if (order === "post-order") {
+      this.left && this.left.depthFirstForEach(cb, order);
+      this.right && this.right.depthFirstForEach(cb, order);
+      cb(this.value);
+   }
+   //pre order
+   else if (order === "pre-order") {
+      cb(this.value);
+      this.left && this.left.depthFirstForEach(cb, order);
+      this.right && this.right.depthFirstForEach(cb, order);
+   }
+   //IN order
+   else {
+      this.left && this.left.depthFirstForEach(cb, order);
+      cb(this.value);
+      this.right && this.right.depthFirstForEach(cb, order);
+   }
+
 
 //COMENTADO PARA REHACERLO CON PROFE MAURI
-   //    if (cb === "post-order") {
+//    if (cb === "post-order") {
 //       //POST ORDER : IZQ DER NODO
 //       this.left.depthFirstForEach(cb);
 //       this.right.depthFirstForEach(cb);
@@ -170,19 +171,21 @@ else{
 
 // METODO BREADTHFIRSTFOREACH
 
-BinarySearchTree.prototype.breadthFirstForEach = function (cb,queu=[]/*para mantener el valor 
-lo podemos acumular en el return */) {
-if(this,.left){
-   queu.push(this.left);
-}
-if (this.right){
-   queu.push(this.right)
-}
-cb(this.value);
-if(queu.length>0){
-   let objTreeFirst =queu.shift();
-   objTreeFirst.breadthFirstForEach(cb,queu); // ver min 1.50 de CodeReview
-}
+BinarySearchTree.prototype.breadthFirstForEach = function (cb, queu = []
+   /*para mantener el valor 
+   lo podemos acumular en el return */
+) {
+   if (this.left) {
+      queu.push(this.left);
+   }
+   if (this.right) {
+      queu.push(this.right)
+   }
+   cb(this.value);
+   if (queu.length > 0) {
+      let objTreeFirst = queu.shift();
+      objTreeFirst.breadthFirstForEach(cb, queu); // ver min 1.50 de CodeReview
+   }
 }
 
 // No modifiquen nada debajo de esta linea
